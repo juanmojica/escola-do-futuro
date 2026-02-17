@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: laravel5_app
+    volumes:
+      - .:/var/www
+    ports:
+      - "8000:8000"
+    working_dir: /var/www/
+    command: bash -c "composer install && php artisan serve --host=0.0.0.0 --port=8000"
+    tty: true
+  mysql:
+    image: mysql:5.7
+    container_name: laravel5_mysql
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data: {}
