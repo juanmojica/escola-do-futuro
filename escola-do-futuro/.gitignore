@@ -1,8 +1,10 @@
+# Dependencies
 /node_modules
+/vendor
+
+# Laravel
 /public/hot
 /public/storage
-/storage/*.key
-/vendor
 .env
 .env.backup
 .phpunit.result.cache
@@ -10,3 +12,39 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+
+# Storage - ignorar conteúdo mas manter estrutura
+/storage/*.key
+/storage/logs/*
+!/storage/logs/.gitkeep
+/storage/app/*
+!/storage/app/.gitkeep
+!/storage/app/public
+/storage/app/public/*
+!/storage/app/public/.gitkeep
+/storage/framework/cache/*
+!/storage/framework/cache/.gitkeep
+/storage/framework/cache/data/*
+!/storage/framework/cache/data/.gitkeep
+/storage/framework/sessions/*
+!/storage/framework/sessions/.gitkeep
+/storage/framework/testing/*
+!/storage/framework/testing/.gitkeep
+/storage/framework/views/*
+!/storage/framework/views/.gitkeep
+
+# Bootstrap cache
+/bootstrap/cache/*
+!/bootstrap/cache/.gitkeep
+
+# Database
+/database/*.sqlite
+/database/*.sqlite-journal
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store

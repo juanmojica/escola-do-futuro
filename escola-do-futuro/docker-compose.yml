@@ -17,7 +17,7 @@ services:
     image: mysql:5.7
     container_name: laravel5_mysql
     environment:
-      MYSQL_DATABASE: laravel
+      MYSQL_DATABASE: escola
       MYSQL_ROOT_PASSWORD: root
     ports:
       - "3306:3306"

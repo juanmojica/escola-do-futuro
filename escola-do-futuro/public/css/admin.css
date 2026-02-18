@@ -1,0 +1,96 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.navbar-brand {
+    font-weight: 600;
+    color: white !important;
+    font-size: 1.25rem;
+}
+
+.nav-link {
+    color: rgba(255,255,255,0.9) !important;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.nav-link:hover {
+    color: white !important;
+    transform: translateY(-1px);
+}
+
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0,0,0,.1);
+}
+
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.05);
+}
+
+.card-header {
+    background-color: #fff;
+    border-bottom: 2px solid #f0f0f0;
+    font-weight: 600;
+    padding: 1.25rem;
+}
+
+.card-header-report {
+    background-color: #4da3ff !important;
+    color: white;
+}
+
+.fas, .far, .fab, .fa {
+    font-family: 'Font Awesome 6 Free' !important;
+    font-weight: 900;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+}
+
+.btn i.fas, .btn i.far, .btn i.fab {
+    pointer-events: none;
+}
+
+.alert.auto-dismiss {
+    position: relative;
+    overflow: hidden;
+}
+
+.alert-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    animation: alert-progress 3s linear forwards;
+}
+
+@keyframes alert-progress {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}
+
+.form-label.required::after,
+label:has(+ input[required])::after,
+label:has(+ textarea[required])::after,
+label:has(+ select[required])::after {
+    content: ' *';
+    color: #dc3545;
+    font-weight: bold;
+}
