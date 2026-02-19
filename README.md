@@ -122,9 +122,6 @@ O script irá:
 ```bash
 # 1. Popular banco com dados de exemplo
 docker exec laravel5_app php artisan db:seed
-
-# 2. Processar fila de notificações (recomendado)
-docker exec laravel5_app php artisan queue:work --stop-when-empty
 ```
 
 ### Instalação Manual
@@ -212,11 +209,10 @@ docker exec laravel5_app php artisan queue:work --stop-when-empty
 # Processar fila continuamente (para desenvolvimento)
 docker exec laravel5_app php artisan queue:work
 
-# Processar fila em background (para produção)
-docker exec -d laravel5_app php artisan queue:work --daemon
+# Produção: use Supervisor (ou outro process manager) para manter o worker ativo
+# Exemplo do comando gerenciado pelo Supervisor:
+docker exec laravel5_app php artisan queue:work --sleep=3 --tries=3 --timeout=90
 ```
-
-💡 **Dica:** Use `--stop-when-empty` após criar matrículas para processar os emails e parar automaticamente.
 
 ### Gerenciar Jobs Falhados
 
