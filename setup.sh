@@ -71,16 +71,6 @@ echo -e "${YELLOW}[6/8]${NC} Gerando chave da aplicação..."
 docker exec laravel5_app php artisan key:generate
 echo -e "${GREEN}✓${NC} Chave gerada"
 
-# 6.1. Criar migration de filas
-echo -e "${YELLOW}[6.1/8]${NC} Criando tabela de filas (jobs)..."
-docker exec laravel5_app php artisan queue:table
-echo -e "${GREEN}✓${NC} Migration de jobs criada"
-
-# 6.2. Criar migration de jobs falhados
-echo -e "${YELLOW}[6.2/8]${NC} Criando tabela de jobs falhados..."
-docker exec laravel5_app php artisan queue:failed-table
-echo -e "${GREEN}✓${NC} Migration de failed_jobs criada"
-
 # 7. Executar migrations no banco de desenvolvimento
 echo -e "${YELLOW}[7/8]${NC} Executando migrations (desenvolvimento)..."
 docker exec laravel5_app php artisan migrate --force
