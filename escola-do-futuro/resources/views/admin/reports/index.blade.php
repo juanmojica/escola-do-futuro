@@ -10,7 +10,7 @@
     </div>
     <div>
         <a href="{{ route('admin.reports.export.pdf', ['course_id' => $courseId]) }}" class="btn btn-danger" target="_blank">
-            <i class="fas fa-file-pdf me-2"></i>Exportar PDF
+            <i class="fas fa-file-pdf me-2"></i>Exportar
         </a>
     </div>
 </div>

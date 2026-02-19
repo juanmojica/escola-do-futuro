@@ -52,7 +52,7 @@ fi
 
 # 4. Subir containers Docker
 echo -e "${YELLOW}[4/8]${NC} Iniciando containers Docker..."
-docker-compose up -d
+docker compose up -d
 echo -e "${GREEN}✓${NC} Containers iniciados"
 
 # Aguardar MySQL iniciar
