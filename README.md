@@ -330,9 +330,6 @@ docker exec laravel5_app php artisan queue:work
 # Processar fila em background (daemon)
 docker exec -d laravel5_app php artisan queue:work --daemon
 
-# Ver status da fila
-docker exec laravel5_app php artisan queue:failed
-
 # Ver logs
 docker exec laravel5_app tail -f storage/logs/laravel.log
 
@@ -408,10 +405,4 @@ docker exec laravel5_app php artisan queue:retry all
 
 # Verificar configuração de email nos logs
 docker exec laravel5_app tail -f storage/logs/laravel.log
-```
-
-**Fila com muitos jobs pendentes:**
-```bash
-# Limpar toda a fila (cuidado!)
-docker exec laravel5_app php artisan queue:flush
 ```
