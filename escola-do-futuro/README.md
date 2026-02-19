@@ -14,7 +14,7 @@ Sistema completo para gestão de instituições de ensino, permitindo o gerencia
 - 📊 Relatórios e Estatísticas
 
 **Principais características:**
-- ✅ 138 testes unitários (100% passing)
+- ✅ 149 testes unitários (100% passing)
 - ✅ Sistema de notificações (Events, Listeners, Jobs)
 - ✅ Arquitetura em camadas (Repository + Service)
 - ✅ Validações robustas com Form Requests
@@ -268,12 +268,43 @@ MAIL_ENCRYPTION=tls
 
 ## 🧪 Executar Testes
 
-O projeto possui **138 testes unitários** cobrindo Services e Validações.
+O projeto possui **149 testes unitários** cobrindo Services, Validações, Events, Listeners, Jobs e sistema de notificações.
 
 ```bash
 # Com descrições legíveis e coloridas
 docker exec laravel5_app vendor/bin/phpunit --testdox --colors=always
+
+# Executar testes verbosos
+docker exec laravel5_app vendor/bin/phpunit --verbose --testdox --colors=always
+
+# Executar testes específicos
+docker exec laravel5_app vendor/bin/phpunit --filter NotificationService
 ```
+
+### Cobertura de Testes
+
+**Services** (6 classes):
+- ✅ CourseService
+- ✅ StudentService
+- ✅ EnrollmentService
+- ✅ SubjectService
+- ✅ NotificationService
+- ✅ ReportService (via CourseService)
+
+**Validações** (4 classes):
+- ✅ CourseRequest
+- ✅ StudentRequest
+- ✅ EnrollmentRequest
+- ✅ SubjectRequest
+
+**Sistema de Notificações**:
+- ✅ StudentEnrolled (Event)
+- ✅ NotifyStudentEnrollment (Listener)
+- ✅ SendEnrollmentNotification (Job)
+- ✅ NotificationService
+- ✅ Disparo de eventos ao matricular estudante
+
+**Total**: 149 testes, 297 assertions
 
 **Importante:** Os testes utilizam banco separado (`escola_testing`) e não afetam os dados de desenvolvimento.
 

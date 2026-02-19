@@ -8,6 +8,7 @@ use App\Repositories\Contracts\EnrollmentRepositoryInterface;
 use App\Repositories\Contracts\StudentRepositoryInterface;
 use App\Exceptions\BusinessException;
 use App\Models\Enrollment;
+use App\Events\StudentEnrolled;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Event;
 use Mockery;
@@ -215,6 +216,47 @@ class EnrollmentServiceTest extends TestCase
 
         // Act
         $this->enrollmentService->enrollStudent($studentId, $courseId);
+    }
+
+    /** @test */
+    public function it_dispatches_student_enrolled_event()
+    {
+        // Arrange
+        Event::fake();
+        
+        $studentId = 1;
+        $courseId = 1;
+        $data = ['enrollment_date' => '2024-01-15'];
+
+        $this->enrollmentRepository
+            ->shouldReceive('checkEnrollmentExists')
+            ->with($studentId, $courseId)
+            ->once()
+            ->andReturn(false);
+
+        $enrolledData = new Enrollment([
+            'student_id' => $studentId,
+            'course_id' => $courseId,
+            'enrollment_date' => '2024-01-15',
+            'status' => 'ativa',
+        ]);
+        $enrolledData->id = 1;
+
+        $this->enrollmentRepository
+            ->shouldReceive('enrollStudent')
+            ->with($studentId, $courseId, $data)
+            ->once()
+            ->andReturn($enrolledData);
+
+        // Act
+        $this->enrollmentService->enrollStudent($studentId, $courseId, $data);
+
+        // Assert - Verifica se o evento foi disparado
+        Event::assertDispatched(StudentEnrolled::class, function ($event) use ($enrolledData) {
+            return $event->enrollment->id === $enrolledData->id
+                && $event->enrollment->student_id === $enrolledData->student_id
+                && $event->enrollment->course_id === $enrolledData->course_id;
+        });
     }
 
     /** @test */
