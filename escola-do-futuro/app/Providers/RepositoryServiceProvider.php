@@ -37,6 +37,11 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Repositories\Contracts\EnrollmentRepositoryInterface::class,
             \App\Repositories\EnrollmentRepository::class
         );
+
+        $this->app->bind(
+            \App\Repositories\Contracts\NotificationRepositoryInterface::class,
+            \App\Repositories\NotificationRepository::class
+        );
     }
 
     /**

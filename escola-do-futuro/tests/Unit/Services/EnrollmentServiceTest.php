@@ -7,7 +7,9 @@ use App\Services\EnrollmentService;
 use App\Repositories\Contracts\EnrollmentRepositoryInterface;
 use App\Repositories\Contracts\StudentRepositoryInterface;
 use App\Exceptions\BusinessException;
+use App\Models\Enrollment;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Event;
 use Mockery;
 
 class EnrollmentServiceTest extends TestCase
@@ -158,6 +160,8 @@ class EnrollmentServiceTest extends TestCase
     public function it_can_enroll_student_in_course()
     {
         // Arrange
+        Event::fake(); // Desabilitar eventos para testes unitários
+        
         $studentId = 1;
         $courseId = 1;
         $data = ['enrollment_date' => '2024-01-15'];
@@ -168,13 +172,13 @@ class EnrollmentServiceTest extends TestCase
             ->once()
             ->andReturn(false);
 
-        $enrolledData = (object) [
-            'id' => 1,
+        $enrolledData = new Enrollment([
             'student_id' => $studentId,
             'course_id' => $courseId,
             'enrollment_date' => '2024-01-15',
             'status' => 'active',
-        ];
+        ]);
+        $enrolledData->id = 1;
 
         $this->enrollmentRepository
             ->shouldReceive('enrollStudent')
@@ -186,7 +190,7 @@ class EnrollmentServiceTest extends TestCase
         $result = $this->enrollmentService->enrollStudent($studentId, $courseId, $data);
 
         // Assert
-        $this->assertEquals($enrolledData, $result);
+        $this->assertInstanceOf(Enrollment::class, $result);
         $this->assertEquals($studentId, $result->student_id);
         $this->assertEquals($courseId, $result->course_id);
     }
@@ -195,6 +199,8 @@ class EnrollmentServiceTest extends TestCase
     public function it_throws_exception_when_student_already_enrolled()
     {
         // Arrange
+        Event::fake(); // Desabilitar eventos para testes unitários
+        
         $studentId = 1;
         $courseId = 1;
 
@@ -349,6 +355,8 @@ class EnrollmentServiceTest extends TestCase
     public function it_delegates_all_operations_to_repository()
     {
         // Arrange & Act
+        Event::fake(); // Desabilitar eventos para testes unitários
+        
         $this->enrollmentRepository
             ->shouldReceive('all')
             ->once()
@@ -366,11 +374,14 @@ class EnrollmentServiceTest extends TestCase
             ->once()
             ->andReturn(false);
 
+        $enrollmentData = new Enrollment(['id' => 1, 'student_id' => 1, 'course_id' => 1]);
+        $enrollmentData->id = 1;
+
         $this->enrollmentRepository
             ->shouldReceive('enrollStudent')
             ->with(1, 1, [])
             ->once()
-            ->andReturn((object) ['id' => 1]);
+            ->andReturn($enrollmentData);
 
         $this->enrollmentService->getAllEnrollments();
         $this->enrollmentService->getEnrollment(1);

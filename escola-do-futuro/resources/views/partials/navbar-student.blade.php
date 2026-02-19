@@ -19,6 +19,8 @@
             </ul>
             <ul class="navbar-nav ms-auto">
                 @auth
+                    @include('partials.notifications-bell')
+                    
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-user-circle me-1"></i> {{ Auth::user()->name }}

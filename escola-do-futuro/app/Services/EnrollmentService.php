@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Exceptions\BusinessException;
 use App\Repositories\Contracts\EnrollmentRepositoryInterface;
 use App\Repositories\Contracts\StudentRepositoryInterface;
+use App\Events\StudentEnrolled;
 use Illuminate\Support\Facades\DB;
 
 class EnrollmentService
@@ -45,7 +46,11 @@ class EnrollmentService
             throw new BusinessException('O estudante já está matriculado neste curso.');
         }
 
-        return $this->enrollmentRepository->enrollStudent($studentId, $courseId, $data);
+        $enrollment = $this->enrollmentRepository->enrollStudent($studentId, $courseId, $data);
+        
+        event(new StudentEnrolled($enrollment));
+        
+        return $enrollment;
     }
 
     public function updateEnrollment($id, array $data)

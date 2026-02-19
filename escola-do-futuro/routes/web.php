@@ -46,3 +46,10 @@ Route::prefix('student')->name('student.')->middleware(['auth', 'student'])->gro
     
     Route::get('/enrollments', 'Student\EnrollmentController@index')->name('enrollments.index');
 });
+
+Route::prefix('notifications')->name('notifications.')->middleware('auth')->group(function () {
+    Route::get('/', 'NotificationController@index')->name('index');
+    Route::get('/unread', 'NotificationController@unread')->name('unread');
+    Route::post('/{id}/read', 'NotificationController@markAsRead')->name('markAsRead');
+    Route::post('/read-all', 'NotificationController@markAllAsRead')->name('markAllAsRead');
+});

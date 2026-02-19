@@ -6,7 +6,6 @@
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
         <h2 class="fw-bold mb-1"><i class="fas fa-clipboard-check me-2"></i>Nova Matrícula</h2>
-        <p class="text-muted mb-0">Preencha os dados para matricular um aluno em um curso</p>
     </div>
 </div>
 
@@ -17,7 +16,7 @@
 
             <div class="mb-3">
                 <label for="student_id" class="form-label fw-semibold">
-                    <i class="fas fa-user me-1"></i>Aluno *
+                    <i class="fas fa-user me-1"></i>Aluno
                 </label>
                 <select class="form-select @error('student_id') is-invalid @enderror" id="student_id" name="student_id" required>
                     <option value="">Selecione um aluno</option>
@@ -32,7 +31,7 @@
 
             <div class="mb-3">
                 <label for="course_id" class="form-label fw-semibold">
-                    <i class="fas fa-book me-1"></i>Curso *
+                    <i class="fas fa-book me-1"></i>Curso
                 </label>
                 <select class="form-select @error('course_id') is-invalid @enderror" id="course_id" name="course_id" required>
                     <option value="">Selecione um curso</option>

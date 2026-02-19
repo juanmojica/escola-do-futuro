@@ -94,8 +94,8 @@ class DatabaseSeeder extends Seeder
 
         // Create Teacher Users
         $teacherUser1 = User::create([
-            'name' => 'Prof. Jubilut',
-            'email' => 'jubilut@escola.com',
+            'name' => 'Prof. Lucas Hiago',
+            'email' => 'lucashiago@escola.com',
             'password' => Hash::make('123123123'),
             'is_admin' => false,
             'role' => 'teacher',
@@ -177,7 +177,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Create Teachers
-        $jubilut = Teacher::create([
+        $lucasHiago = Teacher::create([
             'user_id' => $teacherUser1->id,
         ]);
 
@@ -202,14 +202,14 @@ class DatabaseSeeder extends Seeder
             'title' => 'Biologia Celular',
             'description' => 'Estudo das células',
             'course_id' => $biologia->id,
-            'teacher_id' => $jubilut->id,
+            'teacher_id' => $lucasHiago->id,
         ]);
 
         Subject::create([
             'title' => 'Genética',
             'description' => 'Estudo da genética',
             'course_id' => $biologia->id,
-            'teacher_id' => $jubilut->id,
+            'teacher_id' => $lucasHiago->id,
         ]);
 
         Subject::create([
