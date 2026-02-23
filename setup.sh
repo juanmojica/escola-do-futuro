@@ -72,6 +72,11 @@ echo -e "${YELLOW}[6/8]${NC} Gerando chave da aplicação..."
 docker exec laravel5_app php artisan key:generate
 echo -e "${GREEN}✓${NC} Chave gerada"
 
+# Reiniciar container para recarregar o .env com a nova chave
+echo "Reiniciando container para aplicar a chave..."
+docker compose restart app
+sleep 5
+
 # 7. Executar migrations no banco de desenvolvimento
 echo -e "${YELLOW}[7/8]${NC} Executando migrations (desenvolvimento)..."
 docker exec laravel5_app php artisan migrate --force
